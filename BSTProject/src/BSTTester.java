@@ -9,6 +9,11 @@
 
  public class BSTTester {
    public static void main(String[] args) {
+    BST med = new BST();
+    med.add("a");
+    
+    med.printInOrder();
    
 	
  }
+}
