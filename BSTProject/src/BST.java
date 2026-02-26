@@ -6,45 +6,101 @@ public class BST implements BSTInterface
     int size = 0;
     public BST ()
     {
-        root = new TreeNode(null);
+        root = null;
     }
     public void add(Comparable newVal)
     {
         if(root!=null)
             addHelper(newVal, root);
         else   
-            root=new TreeNode(newVal, null, null);
+            root=new TreeNode(newVal);
         size++;
     }
     public void addHelper(Comparable newVal, TreeNode e)
     {
-        if(newVal<=e.getValue)
+        if(newVal.compareTo(e.getValue())<=0)
             if(e.getLeft()==null)
-                e.setLeft(newVal);
+                e.setLeft(new TreeNode(newVal));
             else
-                addHelper(e.getValue(), e.leftChild());
+                addHelper(newVal, e.getLeft());
         else  
             if(e.getRight()==null)
-                e.setRight(newVal);  
+                e.setRight(new TreeNode(newVal));  
             else
-                addHelper(e.getValue(), e.RightChild());
+                addHelper(newVal, e.getRight());
     }
     public void printInOrder()
     {
         if(root!=null)
         {
             printInOrderHelper(root.getLeft());
-            System.out.print(root.getValue());
+            System.out.println(root.getValue());
             printInOrderHelper(root.getRight());
         }
     }
     public void printInOrderHelper(TreeNode subRoot)
     {
+        if(subRoot!=null)
+        {
+            printInOrderHelper(subRoot.getLeft());
+            System.out.println(subRoot.getValue());
+            printInOrderHelper(subRoot.getRight());
+        }
+    }
+    public void printPreOrder()
+    {
         if(root!=null)
         {
-            printInOrder(subRoot.getLeft());
-            System.out.print(subRoot.getValue());
-            printInOrder(subRoot.getRight());
+            System.out.println(root.getValue());
+            printPreOrderHelper(root.getLeft());
+            printPreOrderHelper(root.getRight());
+        }
+    }
+    public void printPreOrderHelper(TreeNode subRoot)
+    {
+        if(subRoot!=null)
+        {
+            System.out.println(subRoot.getValue());
+            printPreOrderHelper(subRoot.getLeft());
+            printPreOrderHelper(subRoot.getRight());
+        }
+    }
+
+    public void printPostOrder()
+    {
+        if(root!=null)
+        {
+            printPostOrderHelper(root.getLeft());
+            printPostOrderHelper(root.getRight());
+            System.out.println(root.getValue());
+        }
+    }
+    public void printPostOrderHelper(TreeNode subRoot)
+    {
+        if(subRoot!=null)
+        {
+            printPostOrderHelper(subRoot.getLeft());
+            printPostOrderHelper(subRoot.getRight());
+            System.out.println(subRoot.getValue());
+        }
+    }
+    public boolean delete(Comparable old)
+    {
+        if(root!=null)
+        {
+            if(root.getValue()==old){
+                if(root.getLeft()==null && root.getLeft()==null){
+                    root = null;
+                    return true;
+                }
+            }
+                
+    }
+    public void deleteHelper(Comparable old, TreeNode subRoot)
+    {
+        if(subRoot!=null)
+        {
+            
         }
     }
     
