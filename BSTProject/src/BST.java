@@ -111,20 +111,58 @@ public class BST implements BSTInterface
                     return true;
                 }
             }
-            else
-                deleteHelper(old, root);
+            else if(root.getValue().compareTo(old)<=0)
+                return deleteHelper(old, root, root.getLeft());
+            else 
+                return deleteHelper(old, root, root.getRight());
         }
-        return false;
-                           
+        return false;                    
     }
-    public void deleteHelper(Comparable old, TreeNode subRoot)
+    public boolean deleteHelper(Comparable old, TreeNode root, TreeNode subRoot)
     {
         if(subRoot!=null)
         {
-            
+            if(old.equals(subRoot.getValue()))
+            {
+                if(subRoot.getLeft()==null && subRoot.getLeft()==null){
+                    subRoot = null;
+                    if(subRoot.equals(root.getLeft()))
+                        root.setLeft(null);
+                    else 
+                        root.setRight(null);
+                    return true;
+                }
+                else if(subRoot.getLeft()==null){
+                    if(subRoot.equals(root.getLeft()))
+                        root.setLeft(subRoot.getRight());
+                    else 
+                        root.setRight(subRoot.getRight());
+                    return true;
+                }
+                else if(subRoot.getRight()==null){
+                    if(subRoot.equals(root.getLeft()))
+                        root.setLeft(subRoot.getLeft());
+                    else 
+                        root.setRight(subRoot.getLeft());
+                    return true;
+                }
+                else
+                {
+                    TreeNode t = subRoot.getLeft();
+                    while(t.getRight()!=null)
+                        t=t.getRight();
+                    t.setRight(subRoot.getRight());
+                    subRoot = subRoot.getLeft();
+                    return true;
+                }
+            }
+            else if(root.getValue().compareTo(old)<=0)
+                return deleteHelper(old, root, root.getLeft());
+            else 
+                return deleteHelper(old, root, root.getRight());
         }
-    }
-    
-    
+        else
+            return false;
 
+    }
 }
