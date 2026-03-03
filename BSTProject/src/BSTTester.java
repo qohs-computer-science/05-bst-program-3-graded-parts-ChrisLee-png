@@ -10,27 +10,35 @@
  public class BSTTester {
    public static void main(String[] args) {
     BST med = new BST();
-    med.add("a");
-    med.add("b");
-    /*
-    med.add("c");
-    med.add("d");
-    med.add("e");
-    med.add("f");
     med.add("g");
-    med.add("h");
-    */
-    System.out.println("In Order Traversal");
-    med.printInOrder();
+    med.add("r");
+    med.add("k");
+    med.add("c");
+    med.add("g");
+    med.add("m");
+    med.add("y");
+    med.add("z");
+    med.add("x");
+
+    
     System.out.println("Pre Order Traversal");
     med.printPreOrder();
     System.out.println("Post Order Traversal");
     med.printPostOrder();
-
-    med.delete("a");
-    
     System.out.println("In Order Traversal");
     med.printInOrder();
+    
+    med.delete("g");
+    med.delete("k");
+    med.delete("z");
+
+    //med.delete("r");
+    System.out.println("In Order Traversal");
+    med.printInOrder();
+
+    /**/
+
+    
    
 	
  }

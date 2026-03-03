@@ -89,7 +89,7 @@ public class BST implements BSTInterface
         if(root!=null)
         {
             if(root.getValue().equals(old)){
-                if(root.getLeft()==null && root.getLeft()==null){
+                if(root.getLeft()==null && root.getRight()==null){
                     root = null;
                     return true;
                 }
@@ -111,10 +111,13 @@ public class BST implements BSTInterface
                     return true;
                 }
             }
-            else if(root.getValue().compareTo(old)<=0)
-                return deleteHelper(old, root, root.getLeft());
-            else 
+            else if(root.getValue().compareTo(old)<0)
+            {
                 return deleteHelper(old, root, root.getRight());
+            }
+                
+            else
+                return deleteHelper(old, root, root.getLeft());
         }
         return false;                    
     }
@@ -124,12 +127,12 @@ public class BST implements BSTInterface
         {
             if(old.equals(subRoot.getValue()))
             {
-                if(subRoot.getLeft()==null && subRoot.getLeft()==null){
-                    subRoot = null;
+                if(subRoot.getLeft()==null && subRoot.getRight()==null){
                     if(subRoot.equals(root.getLeft()))
                         root.setLeft(null);
                     else 
                         root.setRight(null);
+                    subRoot = null;
                     return true;
                 }
                 else if(subRoot.getLeft()==null){
@@ -137,13 +140,16 @@ public class BST implements BSTInterface
                         root.setLeft(subRoot.getRight());
                     else 
                         root.setRight(subRoot.getRight());
+                    subRoot = null;
                     return true;
                 }
                 else if(subRoot.getRight()==null){
+                    System.out.println("E");
                     if(subRoot.equals(root.getLeft()))
                         root.setLeft(subRoot.getLeft());
                     else 
                         root.setRight(subRoot.getLeft());
+                    subRoot = null;
                     return true;
                 }
                 else
@@ -156,10 +162,12 @@ public class BST implements BSTInterface
                     return true;
                 }
             }
-            else if(root.getValue().compareTo(old)<=0)
-                return deleteHelper(old, root, root.getLeft());
+            else if(subRoot.getValue().compareTo(old)<0)
+            {
+                return deleteHelper(old, subRoot, subRoot.getRight());
+            }   
             else 
-                return deleteHelper(old, root, root.getRight());
+                return deleteHelper(old, subRoot, subRoot.getLeft());
         }
         else
             return false;
