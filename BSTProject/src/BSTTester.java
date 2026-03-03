@@ -1,8 +1,9 @@
 /*
- * TODO: Name
- * TODO: Date
- * TODO: Class Period
- * TODO: Program Description
+ * Christopher Lee
+ * 3/3/26
+ * Pd:3
+ * Create a BST class that implements the BSTInterface and uses the TreeNode class to create a Binary Search Tree.  
+ * The class will include the functionality to be constructed, have elements added to it, found within it, replaced, deleted from it, and the tree itself will be traversable.  
  */
 
  import java.lang.Comparable;
@@ -35,11 +36,6 @@
     med.delete("r");
     System.out.println("In Order Traversal");
     med.printInOrder();
-
-    
-
-    
-   
 	
- }
-}
+ }//end main
+}//end class
