@@ -28,15 +28,15 @@
     System.out.println("In Order Traversal");
     med.printInOrder();
     
-    med.delete("g");
+    /**/
     med.delete("k");
     med.delete("z");
-
-    //med.delete("r");
+    med.delete("g");
+    med.delete("r");
     System.out.println("In Order Traversal");
     med.printInOrder();
 
-    /**/
+    
 
     
    

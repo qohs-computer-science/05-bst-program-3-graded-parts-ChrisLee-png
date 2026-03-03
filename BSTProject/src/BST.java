@@ -7,7 +7,7 @@ public class BST implements BSTInterface
     public BST ()
     {
         root = null;
-    }
+    }//BST constructor
     public void add(Comparable newVal)
     {
         if(root!=null)
@@ -15,7 +15,7 @@ public class BST implements BSTInterface
         else   
             root=new TreeNode(newVal);
         size++;
-    }
+    }//add method
     public void addHelper(Comparable newVal, TreeNode e)
     {
         if(newVal.compareTo(e.getValue())<=0)
@@ -28,7 +28,7 @@ public class BST implements BSTInterface
                 e.setRight(new TreeNode(newVal));  
             else
                 addHelper(newVal, e.getRight());
-    }
+    }//addHelper method
     public void printInOrder()
     {
         if(root!=null)
@@ -36,8 +36,8 @@ public class BST implements BSTInterface
             printInOrderHelper(root.getLeft());
             System.out.println(root.getValue());
             printInOrderHelper(root.getRight());
-        }
-    }
+        }//checks if tree is empty
+    }//printInOrder method
     public void printInOrderHelper(TreeNode subRoot)
     {
         if(subRoot!=null)
@@ -45,8 +45,8 @@ public class BST implements BSTInterface
             printInOrderHelper(subRoot.getLeft());
             System.out.println(subRoot.getValue());
             printInOrderHelper(subRoot.getRight());
-        }
-    }
+        }//checks if tree still has things
+    }//print printInOrderHelper method
     public void printPreOrder()
     {
         if(root!=null)
@@ -54,8 +54,8 @@ public class BST implements BSTInterface
             System.out.println(root.getValue());
             printPreOrderHelper(root.getLeft());
             printPreOrderHelper(root.getRight());
-        }
-    }
+        }//checks if tree is empty
+    }//print printPreOrder method
     public void printPreOrderHelper(TreeNode subRoot)
     {
         if(subRoot!=null)
@@ -63,8 +63,8 @@ public class BST implements BSTInterface
             System.out.println(subRoot.getValue());
             printPreOrderHelper(subRoot.getLeft());
             printPreOrderHelper(subRoot.getRight());
-        }
-    }
+        }//checks if tree still has things
+    }//print printPreOrderHelper method
 
     public void printPostOrder()
     {
@@ -73,8 +73,8 @@ public class BST implements BSTInterface
             printPostOrderHelper(root.getLeft());
             printPostOrderHelper(root.getRight());
             System.out.println(root.getValue());
-        }
-    }
+        }//checks if tree is empty
+    }//print printPostOrder method
     public void printPostOrderHelper(TreeNode subRoot)
     {
         if(subRoot!=null)
@@ -82,8 +82,8 @@ public class BST implements BSTInterface
             printPostOrderHelper(subRoot.getLeft());
             printPostOrderHelper(subRoot.getRight());
             System.out.println(subRoot.getValue());
-        }
-    }
+        }//checks if tree still has things
+    }//print printPostOrder method
     public boolean delete(Comparable old)
     {
         if(root!=null)
@@ -92,15 +92,15 @@ public class BST implements BSTInterface
                 if(root.getLeft()==null && root.getRight()==null){
                     root = null;
                     return true;
-                }
+                }//case for when there is no child
                 else if(root.getLeft()==null){
                     root = root.getRight();
                     return true;
-                }
+                }//case for when there is only right child
                 else if(root.getRight()==null){
                     root = root.getLeft();
                     return true;
-                }
+                }//case for when there is only left child
                 else
                 {
                     TreeNode t = root.getLeft();
@@ -109,68 +109,68 @@ public class BST implements BSTInterface
                     t.setRight(root.getRight());
                     root = root.getLeft();
                     return true;
-                }
-            }
+                }//case for when there are two children
+            }//checks for if root is value
             else if(root.getValue().compareTo(old)<0)
-            {
                 return deleteHelper(old, root, root.getRight());
-            }
                 
             else
                 return deleteHelper(old, root, root.getLeft());
-        }
+        }//checks if tree is empty
         return false;                    
-    }
-    public boolean deleteHelper(Comparable old, TreeNode root, TreeNode subRoot)
+    }//delete method
+    public boolean deleteHelper(Comparable old, TreeNode parent, TreeNode subRoot)
     {
         if(subRoot!=null)
         {
             if(old.equals(subRoot.getValue()))
             {
                 if(subRoot.getLeft()==null && subRoot.getRight()==null){
-                    if(subRoot.equals(root.getLeft()))
-                        root.setLeft(null);
+                    if(subRoot.equals(parent.getLeft()))
+                        parent.setLeft(null);
                     else 
-                        root.setRight(null);
+                        parent.setRight(null);
                     subRoot = null;
                     return true;
-                }
+                }//case for when there is no children
                 else if(subRoot.getLeft()==null){
-                    if(subRoot.equals(root.getLeft()))
-                        root.setLeft(subRoot.getRight());
+                    if(subRoot.equals(parent.getLeft()))
+                        parent.setLeft(subRoot.getRight());
                     else 
-                        root.setRight(subRoot.getRight());
+                        parent.setRight(subRoot.getRight());
                     subRoot = null;
                     return true;
-                }
-                else if(subRoot.getRight()==null){
+                }//case for when there is only right child
+                else if(subRoot.getRight()==null)
+                {
                     System.out.println("E");
-                    if(subRoot.equals(root.getLeft()))
-                        root.setLeft(subRoot.getLeft());
+                    if(subRoot.equals(parent.getLeft()))
+                        parent.setLeft(subRoot.getLeft());
                     else 
-                        root.setRight(subRoot.getLeft());
+                        parent.setRight(subRoot.getLeft());
                     subRoot = null;
                     return true;
-                }
+                }//case for when there is only left child
                 else
                 {
+                    if(subRoot.equals(parent.getLeft()))
+                        parent.setLeft(subRoot.getLeft());
+                    else 
+                        parent.setRight(subRoot.getLeft());
                     TreeNode t = subRoot.getLeft();
                     while(t.getRight()!=null)
                         t=t.getRight();
                     t.setRight(subRoot.getRight());
-                    subRoot = subRoot.getLeft();
                     return true;
-                }
-            }
+                }//case for when there is two children
+            }//checks if subroot matches value
             else if(subRoot.getValue().compareTo(old)<0)
-            {
-                return deleteHelper(old, subRoot, subRoot.getRight());
-            }   
+                return deleteHelper(old, subRoot, subRoot.getRight());  
             else 
                 return deleteHelper(old, subRoot, subRoot.getLeft());
-        }
+        }//checks if tree still has things
         else
             return false;
 
-    }
-}
+    }//deleteHelper method
+}//BST class
