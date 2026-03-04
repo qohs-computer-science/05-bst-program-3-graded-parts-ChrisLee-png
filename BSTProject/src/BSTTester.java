@@ -11,6 +11,7 @@
  public class BSTTester {
    public static void main(String[] args) {
     BST med = new BST();
+    System.out.println(med.isEmpty());
     med.add("g");
     med.add("r");
     med.add("k");
@@ -36,6 +37,10 @@
     med.delete("r");
     System.out.println("In Order Traversal");
     med.printInOrder();
+
+    System.out.println(med.size());
+    System.out.println(med.isEmpty());
+    System.out.println(med.find("m"));
 	
  }//end main
 }//end class

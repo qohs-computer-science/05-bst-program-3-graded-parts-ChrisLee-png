@@ -16,7 +16,7 @@ public class BST implements BSTInterface
             root=new TreeNode(newVal);
         size++;
     }//add method
-    public void addHelper(Comparable newVal, TreeNode e)
+    private void addHelper(Comparable newVal, TreeNode e)
     {
         if(newVal.compareTo(e.getValue())<=0)
             if(e.getLeft()==null)
@@ -38,7 +38,7 @@ public class BST implements BSTInterface
             printInOrderHelper(root.getRight());
         }//checks if tree is empty
     }//printInOrder method
-    public void printInOrderHelper(TreeNode subRoot)
+    private void printInOrderHelper(TreeNode subRoot)
     {
         if(subRoot!=null)
         {
@@ -56,7 +56,7 @@ public class BST implements BSTInterface
             printPreOrderHelper(root.getRight());
         }//checks if tree is empty
     }//print printPreOrder method
-    public void printPreOrderHelper(TreeNode subRoot)
+    private void printPreOrderHelper(TreeNode subRoot)
     {
         if(subRoot!=null)
         {
@@ -75,7 +75,7 @@ public class BST implements BSTInterface
             System.out.println(root.getValue());
         }//checks if tree is empty
     }//print printPostOrder method
-    public void printPostOrderHelper(TreeNode subRoot)
+    private void printPostOrderHelper(TreeNode subRoot)
     {
         if(subRoot!=null)
         {
@@ -86,6 +86,7 @@ public class BST implements BSTInterface
     }//print printPostOrder method
     public boolean delete(Comparable old)
     {
+        size--;
         if(root!=null)
         {
             if(root.getValue().equals(old)){
@@ -117,9 +118,10 @@ public class BST implements BSTInterface
             else
                 return deleteHelper(old, root, root.getLeft());
         }//checks if tree is empty
+        size++;
         return false;                    
     }//delete method
-    public boolean deleteHelper(Comparable old, TreeNode parent, TreeNode subRoot)
+    private boolean deleteHelper(Comparable old, TreeNode parent, TreeNode subRoot)
     {
         if(subRoot!=null)
         {
@@ -169,8 +171,74 @@ public class BST implements BSTInterface
             else 
                 return deleteHelper(old, subRoot, subRoot.getLeft());
         }//checks if tree still has things
-        else
-            return false;
+        size++;
+        return false;
 
     }//deleteHelper method
+
+    public boolean find(Comparable toFind)
+    {
+        if(root!=null)
+            if(root.getValue().equals(toFind))
+                return true;
+            else if(root.getValue().compareTo(toFind)<0)
+                return findHelper(toFind, root.getRight());
+            else
+                return findHelper(toFind, root.getLeft());
+        else
+            return false;
+    }//add method
+    
+    private boolean findHelper(Comparable toFind, TreeNode e)
+    {
+        if(e!=null)
+            if(e.getValue().equals(toFind))
+                return true;
+            else if(e.getValue().compareTo(toFind)<0)
+                return findHelper(toFind, e.getRight());
+            else    
+                return findHelper(toFind, e.getLeft());
+        else
+            return false;
+    }
+
+    public int size()
+    {
+        return size;
+    }//print printPostOrder method
+
+    public boolean isEmpty()
+    {
+        return size==0;
+    }
+
+    public boolean replace(Comparable old, Comparable toAdd)
+    {
+        if(root!=null)
+            if(root.getValue().equals(old))
+            {
+                
+                return true;
+            }
+            else if(root.getValue().compareTo(old)<0)
+                return replaceHelper(old, toAdd, root.getRight());
+            else
+                return replaceHelper(old, toAdd, root.getLeft());
+        else
+            return false;
+    }
+    private boolean replaceHelper(Comparable old, Comparable toAdd, TreeNode e)
+    {
+        if(e!=null)
+            if(e.getValue().equals(old))
+                
+                return true;
+            else if(e.getValue().compareTo(old)<0)
+                return findHelper(old, e.getRight());
+            else    
+                return findHelper(old, e.getLeft());
+        else
+            return false;
+    }
+
 }//BST class
