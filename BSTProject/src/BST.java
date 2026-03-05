@@ -217,7 +217,8 @@ public class BST implements BSTInterface
         if(root!=null)
             if(root.getValue().equals(old))
             {
-                
+                delete(old);
+                add(toAdd);
                 return true;
             }
             else if(root.getValue().compareTo(old)<0)
@@ -231,12 +232,15 @@ public class BST implements BSTInterface
     {
         if(e!=null)
             if(e.getValue().equals(old))
-                
+            {
+                delete(old);
+                add(toAdd);
                 return true;
+            }
             else if(e.getValue().compareTo(old)<0)
-                return findHelper(old, e.getRight());
+                return replaceHelper(old, toAdd, e.getRight());
             else    
-                return findHelper(old, e.getLeft());
+                return replaceHelper(old, toAdd, e.getLeft());
         else
             return false;
     }

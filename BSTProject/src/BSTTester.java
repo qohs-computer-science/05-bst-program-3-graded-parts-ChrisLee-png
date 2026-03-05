@@ -11,18 +11,22 @@
  public class BSTTester {
    public static void main(String[] args) {
     BST med = new BST();
-    System.out.println(med.isEmpty());
-    med.add("g");
-    med.add("r");
-    med.add("k");
-    med.add("c");
-    med.add("g");
-    med.add("m");
-    med.add("y");
-    med.add("z");
-    med.add("x");
+    System.out.println("BST is empty: "+ med.isEmpty());
+    System.out.println("Values are now added ");
+    med.add("O");
+    med.add("R");
+    med.add("C");
+    med.add("H");
+    med.add("A");
+    med.add("R");
+    med.add("D");
+    med.add("Q");
+    med.add("U");
+    med.add("I");
+    med.add("N");
+    med.add("C");
+    med.add("E");
 
-    
     System.out.println("Pre Order Traversal");
     med.printPreOrder();
     System.out.println("Post Order Traversal");
@@ -31,16 +35,21 @@
     med.printInOrder();
     
     /**/
-    med.delete("k");
-    med.delete("z");
-    med.delete("g");
-    med.delete("r");
-    System.out.println("In Order Traversal");
+    System.out.println("D was removed: "+ med.delete("D"));
+    System.out.println("O was removed: "+ med.delete("O"));
+    System.out.println("C was removed: "+ med.delete("C"));
+    System.out.println("E was removed: "+ med.delete("E"));
+
+
+    System.out.println("In Order Traversal after removals");
     med.printInOrder();
 
-    System.out.println(med.size());
-    System.out.println(med.isEmpty());
-    System.out.println(med.find("m"));
-	
+    System.out.println("BST stores "+med.size()+" values");
+    System.out.println("BST is empty: "+ med.isEmpty());
+    System.out.println("m was found: "+med.find("m"));
+    System.out.println("R was replaced: "+med.replace("R","m"));
+
+    System.out.println("In Order Traversal after replacement");
+    med.printInOrder();
  }//end main
 }//end class
